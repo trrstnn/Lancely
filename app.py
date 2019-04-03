@@ -49,9 +49,9 @@ def after_request(response):
 def index(name=None):
     if 'auth_token' in session:
     
-        return redirect(url_for('profile'))
+        return redirect(url_for('layout.html'))
     else: 
-        return render_template('layout.html',title="Dashboard", name=name)
+        return render_template('splash.html',title="Dashboard", name=name)
 
 
 
