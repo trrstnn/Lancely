@@ -56,6 +56,8 @@ def index(name=None):
 
 
 
+
+
 ## =======================================================
 ## DELETE WORKOUT ROUTE
 ## =======================================================
@@ -117,9 +119,7 @@ def register():
             email = form.email.data,
             password = form.password.data,
             name = form.name.data,
-            height = form.height.data,
-            weight = form.weight.data,
-            goal = form.goal.data
+            freelancer = form.freelancer.data
             )
         return redirect('/login') # once the submissin is succesful, user is redirected to the index function which routes back to the home page
     return render_template('register.html', form=form)
