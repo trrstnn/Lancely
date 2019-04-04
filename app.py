@@ -80,20 +80,20 @@ def index(name=None):
 
 
 
-# @app.route("/profile/")
-# @app.route("/profile", methods=['GET', 'POST'])
-# @login_required
-# def profile():
-#     form = forms.WorkoutForm()
-#     workouts = models.Workout.select().where(models.Workout.user == current_user.id)
+@app.route("/profile/")
+@app.route("/profile", methods=['GET', 'POST'])
+@login_required
+def profile():
+    # form = forms.WorkoutForm()
+    # workouts = models.Workout.select().where(models.Workout.user == current_user.id)
     
-#     if form.validate_on_submit():
-#         models.Workout.create(
-#         name=form.name.data.strip(),
-#         description=form.description.data.strip(), 
-#         user = current_user.id)
-#         return render_template("profile.html", user=current_user, form=form, workouts=workouts)
-#     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    # if form.validate_on_submit():
+    #     models.Workout.create(
+    #     name=form.name.data.strip(),
+    #     description=form.description.data.strip(), 
+    #     user = current_user.id)
+    #     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    return render_template("profile.html", user=current_user)
 
 
 
@@ -101,7 +101,20 @@ def index(name=None):
 ## EDIT PROFILE ROUTE
 ## =======================================================
 
+@app.route('/editProfile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form= forms.UpdateUserForm()
+    user = models.User.get(current_user.id)
+    if form.validate_on_submit():
+        user.summary = form.summary.data
+        user.experience = form.experience.data
+        user.skills = form.skills.data
+        user.save()
+        flash('Your Profile has been updated.') # redirects the user back to the profile page after the form is submitted
+        return redirect(url_for('profile'))
 
+    return render_template('edit_profile.html', form = form)
 
 
 ## =======================================================
@@ -114,6 +127,7 @@ def register():
     form = forms.RegisterForm() # importing the RegisterFrom from forms.py
     if form.validate_on_submit(): #if the data in the form is valid,  then we are gonna create a user
         flash("Successful Signup!", 'Sucess')
+        print(form.freelancer.data)
         models.User.create_user(  # calling the create_user function from the user model and passing in the form data
             username = form.username.data,
             email = form.email.data,
