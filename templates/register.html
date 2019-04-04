@@ -1,31 +1,24 @@
 {% extends "layout.html" %}
 {%block content%}     
-<form method="POST">
-<div class="field">
-    <p class="control has-icons-left has-icons-right">
-      <input class="input" type="email" placeholder="Email">
-      <span class="icon is-small is-left">
-        <i class="fas fa-envelope"></i>
-      </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-check"></i>
-      </span>
-    </p>
-  </div>
-  <div class="field">
-    <p class="control has-icons-left">
-      <input class="input" type="password" placeholder="Password">
-      <span class="icon is-small is-left">
-        <i class="fas fa-lock"></i>
-      </span>
-    </p>
-  </div>
-  <div class="field">
-    <p class="control">
-      <button class="button is-success">
-        Login
-      </button>
-    </p>
-  </div>
-</form> 
-  {%endblock%}
+<div class="register-container">
+  <form method="POST" action="" class="form register">
+    <h1>Register</h1>
+    <hr />
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+    <div class="field">
+      {% if field.errors %} {% for error in field.errors %}
+      <div class="notification error">{{ error }}</div>
+      {% endfor %} {% endif %}
+      {{ field(placeholder=field.label.text) }}
+    </div>
+    {% endfor %}
+    <button type="submit" id="submit">Register!</button>
+  </form>
+</div>
+
+</div>
+</div>
+{% endblock %}
+
+ 
