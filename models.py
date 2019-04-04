@@ -19,6 +19,10 @@ class User(UserMixin, Model):
     email = CharField(unique=True)
     password = CharField(max_length=100)
     name = CharField()
+    password = CharField(max_length=100)
+    experience = IntegerField(null=False)
+    skills = CharField(max_length=100, null=False)
+    category = CharField(null=True) 
     freelancer = BooleanField(index=True, default=False)
     joined_at = DateTimeField(default=date.today().strftime("%Y-%m-%d"))
     class Meta:
@@ -35,7 +39,6 @@ class User(UserMixin, Model):
                 password = generate_password_hash(password),
                 name = name,
                 freelancer = freelancer
-                
             )
         except IntegrityError:
             raise ValueError("User already exists")
