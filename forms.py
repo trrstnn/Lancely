@@ -58,11 +58,19 @@ class RegisterForm(Form):
             DataRequired()
         ])
     freelancer = BooleanField(
-        'Are you a freelancer?',
-        validators = [
-            DataRequired()
-        ])
+        'Are you a freelancer?'
+        )
   
 class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(), Email() ])
     password = PasswordField('Password', validators=[DataRequired() ])
+
+
+class UpdateUserForm(Form):
+    # username = TextField("Username")
+    # email = TextField("Email")
+    # name = TextField("Name")
+    summary = IntegerField()
+    experience = IntegerField("How many years have you been doing this?")
+    skills = TextAreaField("Skills")
+    submit = SubmitField('Edit Profile')
