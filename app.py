@@ -108,6 +108,7 @@ def edit_profile():
     user = models.User.get(current_user.id)
     if form.validate_on_submit():
         user.summary = form.summary.data
+        user.category = form.category.data
         user.experience = form.experience.data
         user.skills = form.skills.data
         user.save()
