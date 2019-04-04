@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="prof-username">{{ current_user.username }}</h1>
+
+<div class="stats-container">
+        
+  <p class="stats"><span> Summary:</span> {{ current_user.summary }}</p>
+  <p class="stats"><span> Experience:</span> {{ current_user.experience }}</p>
+  <p class="stats"><span> Skills:</span> {{ current_user.skills }}</p>
+  <!-- <p class="stats"><span> About me:</span></p> -->
+  <p class="stats"><span> Join Date:</span> {{ current_user.joined_at }}</p>
+  <div class='user-edit'><a href="{{url_for('edit_profile')}}"><i class="fas fa-user-edit"></i>Edit Profile</a></div>	  
+</div>
+{% endblock %}
