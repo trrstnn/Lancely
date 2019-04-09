@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="search">
+    <div class="searchbar">
+            <div class="control">
+                    <input class="input" type="text" placeholder="FIND A PROFESSIONAL TODAY">
+                    <a href="{{url_for('results')}}" class="button is-primary">Search</a>
+                  </div>
+    </div>
+</div>
+{%endblock%}
