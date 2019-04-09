@@ -19,6 +19,9 @@ class User(UserMixin, Model):
     email = CharField(unique=True)
     password = CharField(max_length=100)
     name = CharField()
+    location = CharField()
+    lng = DoubleField(null=True)
+    lat = DoubleField(null=True)
     password = CharField(max_length=100)
     experience = IntegerField(null=True)
     summary = CharField(null=True)
@@ -32,14 +35,15 @@ class User(UserMixin, Model):
     
     #  function that creates a new user
     @classmethod
-    def create_user(cls, username, email , password, name, freelancer):
+    def create_user(cls, username, email , password, name, freelancer,location):
         try:
             cls.create(
                 username = username,
                 email = email,
                 password = generate_password_hash(password),
                 name = name,
-                freelancer = freelancer
+                freelancer = freelancer,
+                location = location
             )
         except IntegrityError:
             raise ValueError("User already exists")
