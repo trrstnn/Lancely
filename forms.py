@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm as Form
 
-from wtforms import TextField, TextAreaField, SubmitField, StringField, PasswordField, IntegerField, BooleanField
+from wtforms import HiddenField, TextField, TextAreaField, SubmitField, StringField, PasswordField, IntegerField, BooleanField
 from wtforms import SelectField
 
 from wtforms.validators import (DataRequired, Regexp, ValidationError, Email, Length, EqualTo, NumberRange)
@@ -60,6 +60,21 @@ class RegisterForm(Form):
     freelancer = BooleanField(
         'Are you a freelancer?'
         )
+    location = StringField(
+        'Where are you located?',
+        validators = [
+            DataRequired()
+        ])
+    lng = HiddenField(
+    
+        validators = [
+            DataRequired()
+        ])
+    lat = HiddenField(
+       
+        validators = [
+            DataRequired()
+        ])
   
 class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(), Email() ])
@@ -74,4 +89,13 @@ class UpdateUserForm(Form):
     category = TextAreaField("What do you specialize in?")
     experience = IntegerField("How many years have you been doing this?")
     skills = TextAreaField("Skills")
+    location = TextAreaField("New Address")
     submit = SubmitField('Edit Profile')
+
+
+class SearchForm(Form):
+    choices = [('Photographer', 'Videographer'),
+               ('DJ', 'Band'),
+               ('Event Planner', '')]
+    select = SelectField('Search for music:', choices=choices)
+    search = StringField('')
