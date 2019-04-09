@@ -42,7 +42,7 @@ def after_request(response):
     return response
 
 ## =======================================================
-## ROOT ROUTE
+## Splash Page
 ## =======================================================
 
 @app.route("/")
@@ -50,8 +50,32 @@ def index(name=None):
     if 'auth_token' in session:
     
         return redirect(url_for('layout.html'))
-    else: 
+    else:                                  
         return render_template('splash.html',title="Dashboard", name=name)
+
+## =======================================================
+## Splash Page
+## ======================================================
+
+@app.route("/searchresults")
+@login_required
+def results():
+    users = models.User.select()
+    
+
+                                        
+    return render_template('results.html',title="results", users=users)
+
+## =======================================================
+## SEARCH
+## ======================================================
+
+@app.route("/find")
+@login_required
+def find():
+    
+                                   
+    return render_template('search.html',title="results")
 
 
 
@@ -73,7 +97,7 @@ def index(name=None):
 #     # return render_template("profile.html", user=current_user, form=form, workouts=workouts)
 
 ## =======================================================
-## EDIT WORKOUT ROUTE
+## PROFILE ROUTE
 ## =======================================================
 
 
@@ -84,15 +108,7 @@ def index(name=None):
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile():
-    # form = forms.WorkoutForm()
-    # workouts = models.Workout.select().where(models.Workout.user == current_user.id)
     
-    # if form.validate_on_submit():
-    #     models.Workout.create(
-    #     name=form.name.data.strip(),
-    #     description=form.description.data.strip(), 
-    #     user = current_user.id)
-    #     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
     return render_template("profile.html", user=current_user)
 
 
@@ -111,6 +127,7 @@ def edit_profile():
         user.category = form.category.data
         user.experience = form.experience.data
         user.skills = form.skills.data
+        user.location = form.location.data
         user.save()
         flash('Your Profile has been updated.') # redirects the user back to the profile page after the form is submitted
         return redirect(url_for('profile'))
@@ -134,7 +151,8 @@ def register():
             email = form.email.data,
             password = form.password.data,
             name = form.name.data,
-            freelancer = form.freelancer.data
+            freelancer = form.freelancer.data,
+            location = form.location.data
             )
         return redirect('/login') # once the submissin is succesful, user is redirected to the index function which routes back to the home page
     return render_template('register.html', form=form)
