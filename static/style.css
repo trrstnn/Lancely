@@ -1,19 +1,221 @@
 .search {
-    background-image:url(../static/search.jpg);
-    background-size: cover;
-    height:100rem;
-    background-attachment: fixed;
-    display:flex;
-    justify-content: center;
-   
-   
+  background-image: url(../static/search.jpg);
+  background-size: cover;
+  height: 100rem;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+
+
 }
+.herocall h1 {
+  font-size:60px;
+  color:white;
+}
+.herocall p{
+  font-size:20px;
+  color:silver;
+}
+.herocall {
+  margin-top:60px;
+  margin-left:30px;
+}
+.herocall a .button {
+  margin-top 20px;
+}
+
 #map {
-    height: 400px;  /* The height is 400 pixels */
-    width: 100%;  /* The width is the width of the web page */
-   }
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
 
 .searchbar input {
-    width:100%;
-    margin-top:80px;
+  width: 100%;
+  margin-top: 80px;
 }
+/* --------
+NAV
+----------- */
+.second-nav ul {
+  background-color: silver;
+  color: white;
+  display: flex;
+  justify-content: column;
+  padding-bottom:35px;
+  text-decoration:none;
+
+}
+.second-nav {
+  height:40px;
+  background:silver;
+
+}
+
+.second-nav li {
+  margin: 12px;
+  padding-left: 20px;
+  
+  padding-top:0;
+
+}
+
+
+.second-nav a {
+  color: pink;
+  font-size:12px;
+}
+
+
+.navbar-brand h2 {
+  font-family: 'Damion', cursive;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: neon1 1.5s ease-in-out infinite alternate;
+}
+
+.navbar-brand h2:hover {
+
+  -webkit-animation: none;
+  -moz-animation: none;
+  animation: none;
+}
+
+.navbar {
+  background-color: black;
+}
+
+@-webkit-keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 70px #FF1177, 0 0 85px #FF1177, 0 0 130px #FF1177;
+  }
+
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 20px #FF1177, 0 0 25px #FF1177, 0 0 25px #FF1177, 0 0 20px #FF1177;
+  }
+}
+
+/* @keyframes neon1 {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+    }
+    to {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+    }
+  } */
+
+/* --------
+Hero
+----------- */
+.hero {
+  background-image:url(../static/hero.jpg);
+  background-size:cover;
+  background-attachment: fixed;
+  height:75vh;
+}
+
+/* --------
+Trusted
+----------- */
+
+.trusted img {
+max-height:60px;
+max-width: 60px;;
+
+
+}
+.trusted {
+  display:flex;
+  flex-direction: row;
+  align-content: space-around;
+  background-color: gray;
+  height:120px;
+  padding-top:30px;
+}
+.trusted-0 {
+  margin-right:40px;
+  margin-left:15px;
+}
+.trusted-1 {
+margin-left:100px;
+}
+.trusted-2 {
+  margin-left:100px;
+}
+.trusted-3 {
+  margin-left:100px;
+}
+.trusted-4 {
+  margin-left:100px;
+}
+/* --------
+Categories Reteration
+----------- */
+
+.categorybox {
+  width:200px;
+  height:150px;
+
+  margin:15px;
+  
+  box-shadow: 1px 2px #888888;
+  
+  
+} 
+.categoryimg {
+  display:flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  margin-left:30px;
+  margin-bottom:40px;
+  
+}
+.trusted h3{
+  font-weight:bold;
+  font-size:20px;
+}
+.categorybox h1 {
+  text-align:center;
+
+  color:gray;
+  font-size:15px;
+}
+.categorybox img {
+  padding-left:65px;
+}
+
+.scope {
+  display:flex;
+  flex-direction:row;
+  height:200px;
+  padding-top:55px;
+  margin-top:30px;
+  margin-bottom:30px;
+  
+ 
+}
+.scope1 {
+  margin:20px;
+  border-left:1px solid gray;
+  padding-left:15px;
+}
+.scope1 h4,h1 {
+  font-weight:bold;
+  font-size:20px;
+}
+footer {
+  height:50px;
+  width:100%;
+  background-color :black;
+}
+footer h1  {
+  font-size:13px;
+  text-align:center;
+  padding-top:15px;
+}
+#freelancer
+

@@ -24,12 +24,14 @@ class User(UserMixin, Model):
     lat = DoubleField(null=True)
     password = CharField(max_length=100)
     experience = IntegerField(null=True)
+    rate = IntegerField(null=True)
     summary = CharField(null=True)
     skills = CharField(max_length=100, null=True)
     category = CharField(null=True) 
     freelancer = BooleanField(index=True, default=False)
     joined_at = DateTimeField(default=date.today().strftime("%Y-%m-%d"))
     class Meta:
+        
         database = DATABASE
         order_by = ('-timestamp',)
     
@@ -37,6 +39,7 @@ class User(UserMixin, Model):
     @classmethod
     def create_user(cls, username, email , password, name, freelancer,location):
         try:
+    
             cls.create(
                 username = username,
                 email = email,
@@ -50,6 +53,9 @@ class User(UserMixin, Model):
 
 class Reviews(Model):
     user = ForeignKeyField(User, backref="Reviews")
+    title = CharField()
+    rating = IntegerField()
+    content = CharField()
     timestamp = DateTimeField(default=datetime.now().strftime("%Y-%m-%d %H:%M"))
 
     class Meta:

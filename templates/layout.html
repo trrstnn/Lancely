@@ -8,57 +8,81 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
-       
+        <link href="https://fonts.googleapis.com/css?family=Damion" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css"/>
         <link rel="stylesheet" type="text/css" href="/static/style.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <nav class="navbar is-warning">
-            <div class="navbar-brand">
-              <a class="navbar-item" href="{{url_for('index')}}">
-                <img src="../static/logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
-              </a><span></span>
-              <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          
-            <div id="navbarExampleTransparentExample" class="navbar-menu">
-              <div class="navbar-start">
-               
-               
-              </div>
-          {% if current_user.is_authenticated %}
+      <div class= "nav-container">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="{{url_for('index')}}">
+              <h2>Instalance</h2>
+            </a>
+        
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+        
+          <div id="navbarBasicExample" class="navbar-menu">
+            
+              {% if current_user.is_authenticated %}
               <div class="navbar-end">
-                          <a class="navbar-item" href="{{url_for('profile')}}">
-                            Profile
-                          </a>
-                          <a class="navbar-item" href="{{url_for('logout')}}">
-                              Logout
-                            </a>
-                            <a class="navbar-item" href="{{url_for('find')}}">
-                                Freelancers
-                              </a>
-                  
-              </div>
-                {%else%}
-
-                <div class="navbar-end">
-                        <a class="navbar-item" href="{{url_for('login')}}">
-                            LOGIN
-                          </a>
-                        
+                  <div class="navbar-item">
+                    <div class="buttons">
                       
+                      <a class="button is-light" href="{{url_for('profile')}}">
+                        Profile
+                      </a>
+                      <a class="button is-primary" href="{{url_for('logout')}}">
+                        <strong>logout</strong>
+                        </a>
+                    </div>
                   </div>
-                {%endif%}
-
+                </div>
+              </div>
+              {%else%}
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="buttons">
+                  
+                  <a class="button is-light" href="{{url_for('login')}}">
+                    Log in
+                  </a>
+                  <a class="button is-primary" href="{{url_for('register')}}">
+                    <strong>Join</strong>
+                    </a>
+                </div>
+              </div>
             </div>
-          </nav>
+          </div>
+        </div>
+        {%endif%}
+        </nav>
+        
+            
+          <div class="second-nav">
+            <ul>
+                <li><a href="{{url_for('photographers')}}">PHOTOGRAPHER</a></li>
+                <li><a href="{{url_for('eventplanners')}}">EVENT PLANNER</a></li>
+                <li><a href="{{url_for('videographers')}}">VIDEOGRAPHER</a></li>
+                <li><a href="{{url_for('djs')}}">DJ</a></li>
+                <li><a href="{{url_for('bartenders')}}">BARTENDER</a></li>
+            </ul>
+          </div>
+          </div>
+          
+        
+      
         {%block content%}
         {%endblock%}
+        <footer>
+            <h1>Instalance Group 2018-2019 All rights reserved</h1>
+          </footer>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKad-Gv_xxWD7rHOXjYEAHG9DUJiQEr20&libraries=places&callback=activePlacesSearch"></script> 
         <script type="text/javascript">
           function initialize() {

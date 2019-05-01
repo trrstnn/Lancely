@@ -5,92 +5,103 @@
 
 </div>
 <html>
-  <head>
-    <style>
-      
-    
-    </style>
-  </head>
-  <body>
-      <div class="card">
-         
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-96x96">
-                  <img src="../static/headshot1.jpg" alt="Placeholder image">
-                </figure>
-              </div>
-              <div class="media-content">
-                <p class="title is-2">{{ current_user.name }}</p>
-              </div>
-            </div>
-{%if current_user.freelancer == True%}
-            <div class="content">
-                <p class="stats"><span> Summary:</span> {{ current_user.summary }}</p>
-                <p class="stats"><span> Category:</span> {{ current_user.category }}</p>
-                <p class="stats"><span> Experience:</span> {{ current_user.experience }} years</p>
-                <p class="stats"><span> Skills:</span> {{ current_user.skills }} </p>
-                <p class="stats"><span> Location:</span> {{ current_user.location }} </p>
-                <p class="stats"><span> Freelancer?:</span> {{ current_user.freelancer }} </p>
-             
-              <br>
-          <p class="stats"><span> Join Date:</span> {{ current_user.joined_at }}</p>
-          
-          <div>
-          <a href="{{url_for('edit_profile')}}" class="button is-primary">UPDATE</a>
-          <a href="{{url_for('edit_profile')}}" class="button is-danger">DELETE</a>
-          </div>
-            </div>
-            
-            {%else%}
-            <div class="content">
-                <p class="stats"><span> Summary:</span> {{ current_user.summary }}</p>
-                <p class="stats"><span> Location:</span> {{ current_user.location }} </p>
-                <p class="stats"><span> Join Date:</span> {{ current_user.joined_at }}</p>
-                <div>
-                    <a href="{{url_for('edit_profile')}}" class="button is-primary">UPDATE</a>
-                    <a href="{{url_for('edit_profile')}}" class="button is-danger">DELETE</a>
-                    </div>
-                      </div>
-          </div>
-                      
-            
-            {%endif%}
-            
-          </div>
+
+<head>
+  <style>
+
+
+  </style>
+</head>
+
+<body>
+  <div class="card">
+
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-96x96">
+            <img src="../static/headshot1.jpg" alt="Placeholder image">
+          </figure>
         </div>
-      
-     
-   
+        <div class="media-content">
+          <p class="title is-2">{{ current_user.name }}</p>
+        </div>
+      </div>
+      {%if current_user.freelancer == True%}
+      <div class="content">
+        <p class="stats"><span> Summary:</span> {{ current_user.summary }}</p>
+        <p class="stats"><span> Hourly:</span> ${{ current_user.rate }}.00</p>
+        <p class="stats"><span> Category:</span> {{ current_user.category }}</p>
+        <p class="stats"><span> Experience:</span> {{ current_user.exerience }} years</p>
+        <p class="stats"><span> Skills:</span> {{ current_user.skills }} </p>
+        <p class="stats"><span> Location:</span> {{ current_user.location }} </p>
+
+
+        <br>
+        <p class="stats"><span> Join Date:</span> {{ current_user.joined_at }}</p>
+
+        <div>
+          <a href="{{url_for('edit_profile')}}" class="button is-primary">UPDATE</a>
+          <a href="{{url_for('delete_user')}}" class="button is-danger">DELETE</a>
+        </div>
+      </div>
+
+      {%else%}
+      <div class="content">
+        <p class="stats"><span> Summary:</span> {{ current_user.summary }}</p>
+        <p class="stats"><span> Location:</span> {{ current_user.location }} </p>
+        <p class="stats"><span> Join Date:</span> {{ current_user.joined_at }}</p>
+        <div>
+          <a href="{{url_for('edit_profile')}}" class="button is-primary">UPDATE</a>
           
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
- 
-        <script>
-            var map;
-            function initMap() {
-               let lat = document.getElementById('lat').value;
-               let lng = document.getElementById('lng').value;
-               var myLatLng = {lat: parseFloat(lat), lng:parseFloat(lng)};
-               console.log(lat, lng)
-                map = new google.maps.Map(document.getElementById('map'), {
-                 center: {lat: parseFloat(lat), lng: parseFloat(lng)},
-                zoom: 15
-              })
-              console.log(map);
-              var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: 'Hello World!'
-              });
-            }
-          
-        </script> 
-}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeTAH5IXZSs2UONUMqDAinjchNRw9g3xg&callback=initMap" async defer>
-    </script>
-  </body>
+        </div>
+      </div>
+    </div>
+
+
+    {%endif%}
+
+  </div>
+  </div>
+
+
+
+
+  <h3>My Google Maps Demo</h3>
+  <!--The div element for the map -->
+  <div id="map"></div>
+
+  <script>
+    var map;
+
+    function initMap() {
+      let lat = document.getElementById('lat').value;
+      let lng = document.getElementById('lng').value;
+      var myLatLng = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng)
+      };
+      console.log(lat, lng)
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: parseFloat(lat),
+          lng: parseFloat(lng)
+        },
+        zoom: 15
+      })
+      console.log(map);
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+      });
+    }
+  </script>
+  }
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeTAH5IXZSs2UONUMqDAinjchNRw9g3xg&callback=initMap"
+    async defer>
+  </script>
+</body>
+
 </html>
 {% endblock %}

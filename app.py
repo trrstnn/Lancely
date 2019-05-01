@@ -51,20 +51,165 @@ def index(name=None):
     
         return redirect(url_for('layout.html'))
     else:                                  
-        return render_template('splash.html',title="Dashboard", name=name)
+        return render_template('landing.html',title="Dashboard", name=name)
 
 ## =======================================================
-## Splash Page
+## Photographers
 ## ======================================================
 
-@app.route("/searchresults")
+
+@app.route("/photographers")
+@app.route("/photographers/<id>", methods=['GET','POST'])
 @login_required
-def results():
-    users = models.User.select()
-    
+def photographers(id=None):
+    print('test')
+    from models import User 
+    if id == None:
+      print('in if')
+       
+      users = (User.select().where(User.category=="photographer"))
+      return render_template('photographers.html', users=users)
+    else:
+      print('in else')
+      user_id = int(id)
+      user = (User.get(User.id == user_id))
+      reviews = user.Reviews
+
+      # Define the form for Posts
+      form = forms.ReviewForm()
+      
+      if form.validate_on_submit():
+        print('form valid')
+        models.Review.create(
+          title = form.user.data.strip(),
+          rating = form.rating.data.strip(),
+          content = form.user.data.strip(),
+          user=user)
+
+        return redirect("/photographers/{}".format(user_id))
+      print('before render')
+      return render_template("photographer.html", user=user, form=form , reviews=reviews)
+
+## =======================================================
+## Photographers
+## ======================================================    
 
                                         
-    return render_template('results.html',title="results", users=users)
+@app.route("/bartenders")
+
+@app.route("/bartenders/<id>", methods=['GET','POST'])
+@login_required
+def bartenders(id=None):
+    from models import User
+    if id == None:
+      users = (User.select().where(User.category=="bartender"))
+      return render_template('bartenders.html',title="results", users=users)
+    else:
+      user_id = int(id)
+      user = (User.get(User.id == user_id))
+      reviews = user.Reviews
+
+      # Define the form for Posts
+      form = forms.ReviewForm()
+      if form.validate_on_submit():
+        models.Review.create(
+          title = form.user.data.strip(),
+          rating = form.rating.data.strip(),
+          content = form.user.data.strip(),
+          user=user)
+
+        return redirect("/bartenders/{}".format(user_id))
+      return render_template("bartender.html", user=user, form=form , reviews=reviews)
+## =======================================================
+## Videographers
+## ======================================================
+@app.route("/videographers")
+@app.route("/videographers/<id>", methods=['GET','POST'])
+@login_required
+def videographers(id=None):
+    from models import User
+    if id == None: 
+      users = (User.select().where(User.category=="videographer"))
+      print(users)
+      return render_template('videographers.html', users=users)
+   
+      user_id = int(id)
+      user = (User.get(User.id == user_id))
+      reviews = user.Reviews
+      
+      # Define the form for Posts
+      form = forms.ReviewForm()
+      if form.validate_on_submit():
+        models.Review.create(
+          title = form.user.data.strip(),
+          rating = form.rating.data.strip(),
+          content = form.user.data.strip(),
+          user=user)
+
+        return redirect("/videographers/{}".format(user_id))
+      return render_template("videographer.html", user=user, form=form , reviews=reviews)
+
+
+## =======================================================
+## DJ
+## ======================================================
+@app.route("/djs")
+@app.route("/djs/<id>", methods=['GET','POST'])
+@login_required
+def djs(id=None):
+    from models import User  
+    if id == None:
+      from models import User  
+      users = (User.select().where(User.category=="dj"))
+      print(users)
+      return render_template('djs.html', users=users)
+    else:
+      user_id = int(id)
+      user = (User.get(User.id == user_id))
+      print(user)
+      reviews = user.Reviews
+
+      # Define the form for Posts
+      form = forms.ReviewForm()
+      if form.validate_on_submit():
+        models.Review.create(
+          title = form.user.data.strip(),
+          rating = form.rating.data.strip(),
+          content = form.user.data.strip(),
+          user=user)
+
+        return redirect("/djs/{}".format(user_id))
+      return render_template("dj.html", user=user, form=form , reviews=reviews)
+## =======================================================
+##Event Planner
+## ======================================================
+@app.route("/eventplanners")
+@app.route("/eventplanners/<id>", methods=['GET','POST'])
+@login_required
+def eventplanners(id=None):
+    from models import User 
+    if id == None:
+       
+      users = (User.select().where(User.category=="planner"))
+      print(users)
+      return render_template('eventplanners.html', users=users)
+    else:
+      user_id = int(id)
+      user = (User.get(User.id == user_id))
+      print(user)
+      reviews = user.Reviews
+
+      # Define the form for Posts
+      form = forms.ReviewForm()
+      if form.validate_on_submit():
+        models.Review.create(
+          title = form.user.data.strip(),
+          rating = form.rating.data.strip(),
+          content = form.user.data.strip(),
+          user=user)
+
+        return redirect("/eventplanners/{}".format(user_id))
+      return render_template("eventplanner.html", user=user, form=form , reviews=reviews)
 
 ## =======================================================
 ## SEARCH
@@ -73,8 +218,7 @@ def results():
 @app.route("/find")
 @login_required
 def find():
-    
-                                   
+
     return render_template('search.html',title="results")
 
 
@@ -82,23 +226,24 @@ def find():
 
 
 
-## =======================================================
-## DELETE WORKOUT ROUTE
-## =======================================================
+# =======================================================
+# DELETE WORKOUT ROUTE
+# =======================================================
 
-# @app.route("/profile/<workoutid>")
-# @login_required
-# def delete_workout(workoutid):
-#     # form = forms.WorkoutForm()
-#     workout = models.Workout.get(workoutid)
-#     workout.delete_instance()
-#     # workouts = models.Workout.select().where(models.Workout.user == current_user.id)
-#     return redirect(url_for('profile'))
-#     # return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+@app.route("/profile/")
 
-## =======================================================
-## PROFILE ROUTE
-## =======================================================
+@login_required
+def delete_user():
+    # form = forms.WorkoutForm()
+    user = models.User.get(models.User.id==current_user.id)
+    models.User.delete_by_id(user)
+    # workouts = models.Workout.select().where(models.Workout.user == current_user.id)
+    return redirect(url_for('profile'))
+    # return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+
+# =======================================================
+# PROFILE ROUTE
+# =======================================================
 
 
 
@@ -127,6 +272,7 @@ def edit_profile():
         user.category = form.category.data
         user.experience = form.experience.data
         user.skills = form.skills.data
+        user.rate = form.rate.data
         user.location = form.location.data
         user.save()
         flash('Your Profile has been updated.') # redirects the user back to the profile page after the form is submitted

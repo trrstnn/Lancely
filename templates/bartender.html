@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="card">
+         
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-96x96">
+                <img src="../static/headshot1.jpg" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-2">{{ user.name }}</p>
+            </div>
+          </div>
+      
+          <div class="content">
+              <p class="stats"><span> Summary:</span> {{ user.summary }}</p>
+              <p class="stats"><span> Category:</span> {{ user.category }}</p>
+              <p class="stats"><span> Experience:</span> {{ user.experience }} years</p>
+              <p class="stats"><span> Skills:</span> {{ user.skills }} </p>
+              <p class="stats"><span> Location:</span> {{ user.location }} </p>
+              <p class="stats"><span> Freelancer?:</span> {{ user.freelancer }} </p>
+           
+            <br>
+        <p class="stats"><span> Join Date:</span> {{ user.joined_at }}</p>
+        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        <a href="mailto:someone@example.com?Subject=Hello%20again" target="_top"
+             class="button is-primary">CONTACT</a>
+        </div>
+        </div>
+        </div>
+       
+{% if Review %}
+    <h1>WORK HISTORY/REVIEWS</h1>
+    {% for review in reviews %}
+    <article class="message is-danger">
+        <div class="message-header">
+            <!-- <a href={{url_for('comments', id=post.id)}}>{{post.title}}</a> -->
+            
+            <p> {{review.title}}</p>
+        </div>
+        <div class="message-body">
+            {{review.rating}}stars
+        </div>
+        <a>r/{{review.content}}</a>
+    </article>
+    {% endfor %}
+  {% endif %}
+  {%endblock%}

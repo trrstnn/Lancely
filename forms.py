@@ -86,16 +86,17 @@ class UpdateUserForm(Form):
     # email = TextField("Email")
     # name = TextField("Name")
     summary = TextAreaField("Tell me more about yourself?")
-    category = TextAreaField("What do you specialize in?")
+    category = SelectField('Work type:',
+        choices=[('planner', 'Event Planner'), ('bartender', 'Bartender'), ('photographer', 'Photographer'),('videographer', 'Videographer'),('dj', 'DJ'),('audio','Audio Engineer')]
+    )
     experience = IntegerField("How many years have you been doing this?")
     skills = TextAreaField("Skills")
+    rate = IntegerField("What is your hourly rate?")
     location = TextAreaField("New Address")
     submit = SubmitField('Edit Profile')
 
-
-class SearchForm(Form):
-    choices = [('Photographer', 'Videographer'),
-               ('DJ', 'Band'),
-               ('Event Planner', '')]
-    select = SelectField('Search for music:', choices=choices)
-    search = StringField('')
+class ReviewForm(Form):
+  title = TextField("By:")
+  rating = IntegerField("rate 1-5")
+  content = TextAreaField("Content") 
+  submit = SubmitField('Submit Comment')
